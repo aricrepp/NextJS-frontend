@@ -14,11 +14,8 @@ import {
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
-  const [selected, setSelected] = useState([]);
   const [deleting, setDeleting] = useState(false);
   const [updating, setUpdating] = useState(false);
-
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks`)
