@@ -21,8 +21,7 @@ nooro-todo-frontend \
 │ &nbsp;&nbsp;&nbsp;&nbsp;├── subfolders\
 ├── src/\
 │ &nbsp;&nbsp;&nbsp;&nbsp;├── subfolders\
-├── **.env.local** \
-│ &nbsp;&nbsp;&nbsp;&nbsp;├── subfolders\
+├── **.env.local** <--- This file \
 ├── .gitignore \
 ├── next.config.ts \
 ├── package.json \
