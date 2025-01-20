@@ -32,7 +32,7 @@ const CreateEdit = () => {
   const addTask = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tasks/create`,
         {
           method: "POST",
           headers: {
@@ -53,7 +53,7 @@ const CreateEdit = () => {
   const editTask = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${task?.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tasks/edit/${task?.id}`,
         {
           method: "PUT",
           headers: {

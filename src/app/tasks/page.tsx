@@ -20,7 +20,7 @@ const Tasks = () => {
   const { setTask } = useTask();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tasks`)
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, [deleting, updating]);
@@ -28,7 +28,7 @@ const Tasks = () => {
   const deleteTask = async (task: Task) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${task?.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tasks/${task?.id}`,
         {
           method: "DELETE",
           headers: {
@@ -52,7 +52,7 @@ const Tasks = () => {
       if (!taskToUpdate) return;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${taskId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tasks/edit/${taskId}`,
         {
           method: "PUT",
           headers: {
