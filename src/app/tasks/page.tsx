@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Counter from "@/components/counter";
 import Popup from "@/components/popup";
+import { useTask } from "@/context/taskContext";
 import { Task } from "../../types";
 import {
   IoIosAddCircleOutline,
@@ -16,6 +17,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [deleting, setDeleting] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const { setTask } = useTask();
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks`)
@@ -46,8 +48,8 @@ const Tasks = () => {
 
   const toggleTaskCompletion = async (taskId: number) => {
     try {
-      const taskToUpdate: Task = tasks.find((task: Task) => task.id === taskId);
-      if (taskToUpdate == undefined) return;
+      const taskToUpdate = tasks.find((task: Task) => task.id === taskId);
+      if (!taskToUpdate) return;
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${taskId}`,
@@ -57,7 +59,8 @@ const Tasks = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...taskToUpdate,
+            ...(taskToUpdate as Task),
+            // @ts-expect-error  Will never be undefined
             completed: !taskToUpdate.completed,
           }),
         }
@@ -75,12 +78,15 @@ const Tasks = () => {
   return (
     <div className="container mx-auto flex flex-col justify-content-center items-center p-4 text-white relative -top-10">
       <Link href={`tasks/create`} className="block w-[736px] mb-10">
-        <span className="flex justify-center items-center bg-[#1E6F9F] text-white p-3 mb-4 inline-block w-[736px] rounded">
+        <button
+          onClick={() => setTask(null)}
+          className="flex justify-center items-center bg-[#1E6F9F] text-white p-3 mb-4 inline-block w-[736px] rounded"
+        >
           Create Task{" "}
           <span className="pl-2">
             <IoIosAddCircleOutline />
           </span>
-        </span>
+        </button>
       </Link>
       <div className="flex justify-between w-[736px] p-2 mb-4">
         <Counter tasks={tasks} value={"single"} />
@@ -125,13 +131,13 @@ const Tasks = () => {
                 >
                   <IoIosTrash />
                 </button>
-                <Link
-                  href={{ pathname: `tasks/edit`, query: { id: task?.id } }}
-                  className="ml-2 pr-1 text-gray-500"
-                >
-                  <span>
+                <Link href={`tasks/edit`} className="ml-2 pr-1 text-gray-500">
+                  <button
+                    className="ml-2 pr-1 text-gray-500 hover:pointer-events-auto"
+                    onClick={() => setTask(task)}
+                  >
                     <IoMdCreate />
-                  </span>
+                  </button>
                 </Link>
               </div>
             </li>

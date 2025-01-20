@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Popup from "../../../components/popup";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Colors, ColorsExtended } from "../../../types";
+import { useTask } from "@/context/taskContext";
 import "../../globals.css";
 
-const CreateEdit: Promise<{ slug: any }> = ({ params }) => {
+const CreateEdit = () => {
   const [title, setTitle] = useState<string>("");
   const [created, setCreated] = useState<boolean>(false);
   const [edited, setEdited] = useState<boolean>(false);
+  const { task } = useTask();
   const [activeColor, setActiveColor] = useState<Colors>({
     colorName: "red",
     color: "#FF3B30",
@@ -27,9 +28,6 @@ const CreateEdit: Promise<{ slug: any }> = ({ params }) => {
     { colorName: "pink", color: "#FF2D55" },
     { colorName: "brown", color: "#A2845E" },
   ];
-
-  const idParams = useSearchParams();
-  const id = idParams.get("id");
 
   const addTask = async () => {
     try {
@@ -55,7 +53,7 @@ const CreateEdit: Promise<{ slug: any }> = ({ params }) => {
   const editTask = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/${task?.id}`,
         {
           method: "PUT",
           headers: {
@@ -111,11 +109,10 @@ const CreateEdit: Promise<{ slug: any }> = ({ params }) => {
           </div>
         </div>
         <button
-          onClick={React.use(params).slug === "create" ? addTask : editTask}
+          onClick={task === null ? addTask : editTask}
           className="bg-[#1E6F9F] text-white p-2 rounded"
         >
-          {String(React.use(params).slug).charAt(0).toUpperCase() +
-            String(React.use(params).slug).slice(1)}
+          {task === null ? "Create" : "Edit"}
         </button>
       </div>
 

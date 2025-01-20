@@ -1,3 +1,4 @@
+//  Interfaces
 export interface Task {
   id: number;
   title: string;
@@ -12,4 +13,9 @@ export interface Colors {
   color: string;
 }
 
+export interface Props {
+  params: string;
+}
+
+//  Types
 export type ColorsExtended = Colors[];
