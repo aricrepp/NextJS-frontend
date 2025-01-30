@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nooro Todo App",
+  title: "Aric Repp",
 };
 
 export default function RootLayout({
