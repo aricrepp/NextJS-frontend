@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
-import { Task } from "../types";
+import { Task } from "../types/types";
 
 interface TaskContextType {
   task: Task | null;

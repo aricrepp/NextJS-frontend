@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-interface PopupProps {
-  message: string;
-  duration?: number;
-}
+import { PopupProps } from "@/types/types";
 
 const Popup: React.FC<PopupProps> = ({ message, duration = 3000 }) => {
   const [visible, setVisible] = useState(true);

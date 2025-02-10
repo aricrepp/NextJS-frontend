@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Popup from "../../../components/popup";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { Colors, ColorsExtended } from "../../../types";
+import { Colors, ColorsExtended } from "../../../types/types";
 import { useTask } from "@/context/taskContext";
 import "../../globals.css";
 
@@ -72,8 +72,8 @@ const CreateEdit = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col justify-content-center items-left w-[736px] mt-16">
-      <Link href={`/`} className="text-gray-500 mb-10">
+    <div className="container mx-auto flex flex-col justify-content-center items-left w-[736px] pt-16">
+      <Link href={`/tasks`} className="text-gray-500 mb-10">
         <span>
           <IoIosArrowRoundBack
             style={{ color: "#ffffff", fontSize: "2.4em" }}

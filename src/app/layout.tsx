@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Righteous } from "next/font/google";
 import Header from "@/components/header";
 import { TaskProvider } from "@/context/taskContext";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const righteous = Righteous({
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -25,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#1a1a1a]`}
-      >
+      <body className={`${righteous.className} antialiased bg-[#232323]`}>
         <TaskProvider>
           <Header></Header>
           {children}

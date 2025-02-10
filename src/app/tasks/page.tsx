@@ -5,9 +5,10 @@ import Link from "next/link";
 import Counter from "@/components/counter";
 import Popup from "@/components/popup";
 import { useTask } from "@/context/taskContext";
-import { Task } from "../../types";
+import { Task } from "../../types/types";
 import {
   IoIosAddCircleOutline,
+  IoIosArrowRoundBack,
   IoIosTrash,
   IoIosClipboard,
   IoMdCreate,
@@ -76,7 +77,17 @@ const Tasks = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col justify-content-center items-center p-4 text-white relative -top-10">
+    <div className="container mx-auto flex flex-col justify-center items-center p-4 text-white relative top-12">
+      <div className="flex justify-start items-start w-[736px]">
+        <Link href={`/`} className="text-gray-500 mb-10">
+          <span>
+            <IoIosArrowRoundBack
+              style={{ color: "#ffffff", fontSize: "2.4em" }}
+            />
+          </span>
+        </Link>
+      </div>
+
       <Link href={`tasks/create`} className="block w-[736px] mb-10">
         <button
           onClick={() => setTask(null)}
