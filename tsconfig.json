@@ -11,7 +11,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": ["@types/three", "@react-three/fiber"],
+    "types": ["@types/three"],
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "jsx": "preserve",
     "incremental": true,
