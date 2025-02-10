@@ -7,21 +7,29 @@ import {
   Environment,
   Bounds,
 } from "@react-three/drei";
-import { Physics, RigidBody, BallCollider } from "@react-three/rapier";
+import {
+  Physics,
+  RigidBody,
+  BallCollider,
+  RapierRigidBody,
+} from "@react-three/rapier";
 
-const MetaBall = ({
-  color,
-  spread,
-  melting,
-  ...props
-}: {
-  color: string;
-  position: number[];
+interface MetaBallProps {
+  color: THREE.Color;
+  position: [number, number, number];
   spread: boolean;
   melting: boolean;
   index: number;
+}
+
+const MetaBall: React.FC<MetaBallProps> = ({
+  color,
+  position,
+  spread,
+  melting,
+  ...props
 }) => {
-  const api = useRef(null!);
+  const api = useRef<RapierRigidBody>(null);
   const strength = useRef<number>(0.35);
   const meltProgress = useRef<number>(0);
   const meltDelay = useRef<number>(Math.random() * 2);
@@ -29,6 +37,8 @@ const MetaBall = ({
   const vec = new THREE.Vector3();
 
   useFrame((state, delta) => {
+    if (!api.current) return;
+
     if (melting) {
       if (meltDelay.current > 0) {
         meltDelay.current -= delta;
@@ -46,7 +56,7 @@ const MetaBall = ({
           (Math.random() - 0.5) * 0.0005
         );
 
-        api.current?.applyImpulse(meltForce);
+        api.current?.applyImpulse(meltForce, true);
         strength.current = Math.max(0.35 * (1 - easeProgress * 0.5), 0.1);
       }
     } else {
@@ -61,13 +71,15 @@ const MetaBall = ({
           vec
             .copy(api.current.translation())
             .normalize()
-            .multiplyScalar(delta * -0.05)
+            .multiplyScalar(delta * -0.05),
+          true
         );
       }
     }
   });
 
   useFrame((state, delta) => {
+    if (!api.current) return;
     if (melting) {
       meltProgress.current = Math.min(meltProgress.current + delta * 0.5, 1);
 
@@ -79,7 +91,7 @@ const MetaBall = ({
         (Math.random() - 0.5) * 0.0005
       );
 
-      api.current?.applyImpulse(meltForce);
+      api.current.applyImpulse(meltForce, true);
       strength.current = Math.max(0.35 * (1 - easeProgress * 0.5), 0.1);
     } else {
       meltProgress.current = 0;
@@ -91,39 +103,43 @@ const MetaBall = ({
           vec
             .copy(api.current.translation())
             .normalize()
-            .multiplyScalar(delta * -0.05)
+            .multiplyScalar(delta * -0.05),
+          true
         );
       }
     }
   });
 
   useEffect(() => {
+    if (!api.current) return;
+
     if (spread) {
       const spreadForce = new THREE.Vector3(
         (Math.random() - 0.5) * 1.1,
         (Math.random() - 0.5) * 1.1,
         (Math.random() - 0.5) * 1.1
       ).multiplyScalar(0.02);
-      api.current.applyImpulse(spreadForce);
+      api.current.applyImpulse(spreadForce, true);
     }
   }, [spread]);
 
   return (
     <RigidBody
       ref={api}
+      position={position}
       colliders={false}
       linearDamping={melting ? 3 : 4}
       angularDamping={0.95}
       {...props}
     >
       <MarchingCube strength={strength.current} subtract={6} color={color} />
-      <BallCollider args={[0.1]} type="dynamic" />
+      <BallCollider args={[0.1]} />
     </RigidBody>
   );
 };
 
 const Pointer = ({ vec = new THREE.Vector3() }) => {
-  const ref = useRef(null!);
+  const ref = useRef<RapierRigidBody>(null!);
   useFrame(({ pointer, viewport }) => {
     const { width, height } = viewport.getCurrentViewport();
     vec.set(-pointer.x * (width / 2), pointer.y * (height / 2), 0);
@@ -131,8 +147,12 @@ const Pointer = ({ vec = new THREE.Vector3() }) => {
   });
   return (
     <RigidBody type="kinematicPosition" colliders={false} ref={ref}>
-      <MarchingCube strength={0.5} subtract={10} color="white" />
-      <BallCollider args={[0.1]} type="dynamic" />
+      <MarchingCube
+        strength={0.5}
+        subtract={10}
+        color={new THREE.Color("white")}
+      />
+      <BallCollider args={[0.1]} />
     </RigidBody>
   );
 };
@@ -147,9 +167,10 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const handleCustomClick = (e) => {
-      console.log("Received click:", e.detail.message);
-      if (e.detail.message === "Start") {
+    const handleCustomClick = (e: Event) => {
+      const customEvent = e as CustomEvent<{ message: string }>;
+      console.log("Received click:", customEvent.detail.message);
+      if (customEvent.detail.message === "Start") {
         isMelting(true);
       } else {
         isMelting(false);
@@ -175,72 +196,72 @@ export const App = () => {
             enableColors
             onClick={handleClick}
           >
-            <meshStandardMaterial vertexColors thickness={0.15} roughness={4} />
+            <meshStandardMaterial vertexColors roughness={4} />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[1, 1, 0.5]}
               spread={spread}
               melting={melting}
               index={0}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[-1, -1, -0.5]}
               spread={spread}
               melting={melting}
               index={1}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[2, 2, 0.5]}
               spread={spread}
               melting={melting}
               index={2}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[-2, -2, -0.5]}
               spread={spread}
               melting={melting}
               index={3}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[3, 3, 0.5]}
               spread={spread}
               melting={melting}
               index={4}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[-3, -3, -0.5]}
               spread={spread}
               melting={melting}
               index={5}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[-1.5, -1.5, -0.5]}
               spread={spread}
               melting={melting}
               index={6}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[-2.5, -2.5, -0.5]}
               spread={spread}
               melting={melting}
               index={7}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[1.5, 1.5, -0.5]}
               spread={spread}
               melting={melting}
               index={8}
             />
             <MetaBall
-              color="skyblue"
+              color={new THREE.Color("skyblue")}
               position={[2.5, 2.5, -0.5]}
               spread={spread}
               melting={melting}
