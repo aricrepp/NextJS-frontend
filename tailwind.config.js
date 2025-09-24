@@ -15,10 +15,20 @@ module.exports = {
   				'50%': {
   					opacity: '0'
   				}
-  			}
+  			},
+			slideDown: {
+					from: { height: "0px" },
+					to: { height: "var(--radix-accordion-content-height)" },
+				},
+			slideUp: {
+				from: { height: "var(--radix-accordion-content-height)" },
+				to: { height: "0px" },
+			},
   		},
   		animation: {
-  			blink: 'blink 1s infinite'
+  			blink: 'blink 1s infinite',
+			slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+			slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

@@ -1,5 +1,8 @@
 import { StackDisplay } from "../stackDisplay";
 
+import * as Accordion from "@radix-ui/react-accordion"
+import { AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
+
 export const Timeline = () => {
   return (
     <div className="relative flex mx-auto justify-center items-center max-w-5xl mt-14">
@@ -31,17 +34,157 @@ export const Timeline = () => {
             <StackDisplay
               stackList={[
                 "Vue",
+                "React",
                 "NextJS",
                 "Python",
                 "GCP",
                 "Typescript",
                 "Tailwind",
                 "Figma",
+                "Reactflow",
+                "Apache Echarts",
                 "Github",
                 "Actions",
                 "Jira",
               ]}
             />
+            <Accordion.Root
+              className="w-full mt-6 rounded-md outline-none border-none focus:border-none focus:outline-none focus:border-none focus:ring-0 focus:ring-offset-0 focus:shadow-none"
+              type="single"
+              defaultValue="item-0"
+              collapsible
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-gray-400">Detailed Breakdown</AccordionTrigger>
+                <AccordionContent className="text-white bg-[#292929]">
+                  <section>
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Frontend Micro-Architecture & Component Design System Implementation</p>
+                      <p className="text-lg text-gray-500">(P&G)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Helped launch a huge internal initiative to revamp all campaign platforms into 1 micro frontend. Started the initial designs to secure funding from each business unit. Lead the frontend for the first 2 projects to ensure success of the platforms.
+                    </p>
+                    <StackDisplay
+                      stackList={[
+                        "Github",
+                        "Actions",
+                        "Jira",
+                        "Figma",
+                      ]}
+                    />
+                  </section>
+                  <section className="mt-8">
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Micro Frontend Platform One</p>
+                      <p className="text-lg text-gray-500">(P&G)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Built the platform that secured funding for the initiative. Platform surrounded utilizing segment and digital data to accurately predict sample size of audience dependant on category selections.
+                    </p>
+                    <StackDisplay
+                      stackList={[
+                        "React",
+                        "Python",
+                        "GCP",
+                        "Typescript",
+                        "Tailwind",
+                        "Figma",
+                        "Github",
+                        "Actions",
+                        "Jira",
+                      ]}
+                    />
+                  </section>
+                  <section className="mt-8">
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Campaign Creation Platform Two</p>
+                      <p className="text-lg text-gray-500">(P&G)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Built the platform that would be the package for all related campaign data and campaign ad platform data. Allowed users to maintain a consistent origin of data from origin to setup to go-live.
+                    </p>
+                    <StackDisplay
+                      stackList={[
+                        "Vue",
+                        "Python",
+                        "GCP",
+                        "Typescript",
+                        "Tailwind",
+                        "Apache Echarts",
+                        "Figma",
+                        "Github",
+                        "Actions",
+                        "Jira",
+                      ]}
+                    />
+                  </section>
+                  <section className="mt-8">
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Interactive Graphical Interface Application</p>
+                      <p className="text-lg text-gray-500">(P&G)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Redesigned user interface using node-based architecture, increasing user acceptance by 60%.
+                      Collaborated with product owners to develop wireframes through iterative processes.
+                      Built responsive components that scaled across both the old platform and new platform.</p>
+                    <StackDisplay
+                      stackList={[
+                        "NextJS",
+                        "Python",
+                        "GCP",
+                        "Typescript",
+                        "Tailwind",
+                        "Figma",
+                        "Reactflow",
+                        "Github",
+                        "Actions",
+                        "Jira",
+                      ]}
+                    />
+                  </section>
+                  <section className="mt-8">
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Supply Chain Automation Service</p>
+                      <p className="text-lg text-gray-500">(Corbus)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Developed frontend components for data visualization of Nth level supply chain mapping. Collected supply chain data from various sources filtered by NLP techniques. Created 10 point predictive index and process to streamline supplier node mappings</p>
+                    <StackDisplay
+                      stackList={[
+                        "React",
+                        "Python",
+                        "GCP",
+                        "Figma",
+                      ]}
+                    />
+                  </section>
+                  <section className="mt-8">
+                    <div className="w-full text-md text-white flex justify-between">
+                      <p className="text-lg text-gray-300">Optimization Tool with Data Visualization</p>
+                      <p className="text-lg text-gray-500">(Corbus)</p>
+                    </div>
+                    <br />
+                    <p className="text-lg text-gray-400">
+                      Leveraged Linear Regression algorithm (ML) to optimize choices from user parameters. Implemented clean, reusable UI components for future production beyond MVP. Created full site identity and design around data optimization </p>
+                   <StackDisplay
+                      stackList={[
+                        "Vue",
+                        "Python",
+                        "GCP",
+                        "Figma",
+                      ]}
+                    />
+                  </section>
+                  
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion.Root>
           </div>
         </div>
         <div className="relative flex items-center w-full">
@@ -71,7 +214,6 @@ export const Timeline = () => {
                 "Typescript",
                 "Node",
                 "GCP",
-                "Typescript",
                 "Figma",
                 "Github",
               ]}
@@ -99,7 +241,7 @@ export const Timeline = () => {
               technical documents and strategies to improve the quality at the
               facility
             </p>
-            <StackDisplay stackList={["JavaScript", "Excel"]} />
+            <StackDisplay stackList={["javascript", "Excel"]} />
           </div>
         </div>
         <div className="relative flex items-center w-full">

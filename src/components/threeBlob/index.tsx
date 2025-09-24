@@ -143,7 +143,7 @@ const Pointer = ({ vec = new THREE.Vector3() }) => {
   useFrame(({ pointer, viewport }) => {
     const { width, height } = viewport.getCurrentViewport();
     vec.set(-pointer.x * (width / 2), pointer.y * (height / 2), 0);
-    ref.current.setNextKinematicTranslation(vec);
+    if(ref.current) ref.current.setNextKinematicTranslation(vec);
   });
   return (
     <RigidBody type="kinematicPosition" colliders={false} ref={ref}>

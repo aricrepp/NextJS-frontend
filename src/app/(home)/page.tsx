@@ -47,7 +47,7 @@ export default function Home() {
         />
         <section
           id="experience-section"
-          className="relative flex items-center flex-col h-[1600px]"
+          className="relative flex items-center flex-col h-auto"
         >
           <div className="mt-[8em] flex flex-col justify-center items-center">
             <h2 className="text-white text-5xl">
