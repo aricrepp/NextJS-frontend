@@ -10,6 +10,36 @@ export const Timeline = () => {
       <div className="flex flex-col space-y-8">
         <div className="relative flex items-center w-full">
           <div className="relative w-6 h-6 flex items-center justify-center bg-white text-white rounded-full border-4 border-white shadow-md z-10"></div>
+          <div className="w-[9.1em] text-4xl text-gray-500 pl-5">2025</div>
+          <div className="w-[36em] pl-[1em] flex flex-col justify-items items-start text-left mt-4">
+            <h3 className="text-2xl font-bold text-white tracking-wider">
+              You're an engineer, Harry
+            </h3>
+            <hr className="w-full my-3 border-gray-700" />
+            <div className="w-full text-md text-white flex justify-between">
+              <p className="text-lg text-gray-300">Full-Stack Engineer & UIUX Designer</p>
+              <p className="text-lg text-gray-500">Capital Dental</p>
+            </div>
+            <br />
+            <p className="text-lg text-gray-400">
+              While freelancing, I joined a very small startup focusing on building a Peer to Peer lending platform. During my time with the company, I built 100% of the MVP frames, design, and starting code for both the website and mobile versions. The founder and myself focused on clean and steady progress during our 2 months together.
+            </p>
+            <StackDisplay
+              stackList={[
+                "React",
+                "React Native",
+                "Typescript",
+                "Tailwind",
+                "AWS",
+                "Figma",
+                "Github",
+                "Trello"
+              ]}
+            />
+          </div>
+        </div>
+        <div className="relative flex items-center w-full">
+          <div className="relative w-6 h-6 flex items-center justify-center bg-white text-white rounded-full border-4 border-white shadow-md z-10"></div>
           <div className="w-[9.1em] text-4xl text-gray-500 pl-5">2021-2024</div>
           <div className="w-[36em] pl-[1em] flex flex-col justify-items items-start text-left">
             <h3 className="text-2xl font-bold text-white tracking-wider">
