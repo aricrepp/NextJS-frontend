@@ -47,10 +47,10 @@ export default function Home() {
         />
         <section
           id="experience-section"
-          className="relative flex items-center flex-col h-auto"
+          className="relative flex justify-center items-center flex-col h-auto"
         >
           <div className="mt-[8em] flex flex-col justify-center items-center">
-            <h2 className="text-white text-5xl">
+            <h2 className="text-white text-2xl md:text-5xl">
               git commit -m 'Professional Experience'
             </h2>
             <Timeline />
@@ -61,7 +61,7 @@ export default function Home() {
           className="relative flex items-center flex-col"
         >
           <div className="mt-[8em] flex flex-col justify-center items-center">
-            <h2 className="text-white text-5xl">git push origin 'Projects'</h2>
+            <h2 className="text-white text-2xl md:text-5xl">git push origin 'Projects'</h2>
             <Projects />
           </div>
         </section>
@@ -70,7 +70,7 @@ export default function Home() {
           className="relative flex items-center flex-col"
         >
           <div className="mt-[8em] flex flex-col justify-center items-center">
-            <h2 className="text-white text-2xl">
+            <h2 className="text-white text-lg md:text-2xl text-center text-wrap w-[300px] md:w-auto">
               Let's connect and see how I can build your next big thing
             </h2>
             <Footer />

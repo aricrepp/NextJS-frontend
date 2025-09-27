@@ -4,7 +4,7 @@ import Link from "next/link";
 export const Projects = () => {
   return (
     <section className="w-full mt-20 flex flex-wrap justify-center items-center">
-      <section className="w-1/2 grid grid-cols-2 gap-4">
+      <section className="w-1/2  flex flex-col items-center gap-4 md:grid md:grid-cols-2 md:gap-4">
         <div className="relative p-6 flex flex-col justify-between items-start border border-white rounded-lg text-white">
           <span className="absolute top-0 left-0 w-full h-[1em] rounded-t-md bg-white"></span>
           <div className="flex justify-between items-center w-full">

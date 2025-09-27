@@ -25,6 +25,9 @@ module.exports = {
 				to: { height: "0px" },
 			},
   		},
+		screens: {
+			'md': {'min': '1199px'},
+		},
   		animation: {
   			blink: 'blink 1s infinite',
 			slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
